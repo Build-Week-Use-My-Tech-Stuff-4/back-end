@@ -1,6 +1,6 @@
 ## What is this project?
 
-A [RESTful API](https://www.w3schools.in/restful-web-services/intro/) to manage _"Users_, their _"Items"_, and \_"Reviews".
+A [RESTful API](https://www.w3schools.in/restful-web-services/intro/) to manage _"Users_, their _"Items"_, and _"Reviews"_.
 
 A User has:
 
