@@ -2,15 +2,24 @@ const db = require('../../data/db-config')
 
 module.exports = {
     findAll,
-    findById
+    findById,
+    remove
 }
 
 function findAll(){
     return db("users")
 }
 
-function findById(user_id){
+function findById(id){
     return db("users")
-    .where({user_id})
+    .where({id})
     .first()
+}
+
+// function findByFilter(filter)
+
+function remove(id){
+    return db("users")
+    .where({id})
+    .del()
 }
