@@ -9,8 +9,10 @@ exports.up = function(knex) {
      users.string('city')
      users.string('state')
      users.string('zip')
+     users.timestamp("created_on").defaultTo(knex.fn.now());
+     users.timestamp("updated_on").defaultTo(knex.fn.now());
  })
- .creatTable('items', items=>{
+ .createTable('items', items=>{
      items.increments('item_id')
      items.string('item_name', 128).notNullable()
      items.text('description').notNullable()

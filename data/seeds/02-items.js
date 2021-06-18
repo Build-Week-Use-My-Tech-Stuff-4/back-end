@@ -6,7 +6,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex("items").insert([
         {
-          id: 1,
+          item_id: 1,
           item_name: "The answer to life, the universe and everything",
           description: "The answer to life, the universe and everything, like I said.",
           location: "Kansas City",
@@ -15,7 +15,7 @@ exports.seed = function (knex) {
           available: true,
         },
         {
-          id: 2,
+          item_id: 2,
           item_name: "Jar of dirt",
           description: "A jar of dirt",
           location: "Miami",
@@ -24,7 +24,7 @@ exports.seed = function (knex) {
           available: true,
         },
         {
-          id: 3,
+          item_id: 3,
           item_name: "The One Ring",
           description: "One ring to rule them all,one ring to find them,One ring to bring them all and in the darkness bind them.",
           location: "Kansas City",
@@ -33,7 +33,7 @@ exports.seed = function (knex) {
           available: false,
         },
         {
-          id: 4,
+          item_id: 4,
           item_name: "test item 1",
           description: "item #1",
           location: "in the db",
@@ -42,7 +42,7 @@ exports.seed = function (knex) {
           available: true,
         },
         {
-          id: 5,
+          item_id: 5,
           item_name: "test item 2",
           description: "item #2",
           location: "in the db",
@@ -51,7 +51,7 @@ exports.seed = function (knex) {
           available: false,
         },
          {
-          id: 6,
+          item_id: 6,
           item_name: "test item 3",
           description: "item #3",
           location: "in the db",
