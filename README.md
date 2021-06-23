@@ -37,16 +37,20 @@ The Web API provides a set of `endpoints` to fulfill the following needs:
 
 Here is a table with the `endpoint` descriptions:
 
-| Action             | URL                  | Method     | Response                 |
-| :----------------- | :------------------- | :--------- | :----------------------- |
-| Add an item        | /api/items           | POST       | the new item (an object) |
-| View list of items | /api/items           | GET        | array of items           |
-| View item details  | /api/items/{item_id} | GET        | an item (an object)      |
-| Update an item     | /api/items/{item_id} | PATCH(PUT) | updated item             |
-| Remove an item     | /api/items/{item_id} | DELETE     | deleted item             |
-| Add a user         | /api/users           | POST       | the new user             |
-| View list of users | /api/users           | GET        | array of users           |
-| View user details  | /api/users/{user_id} | GET        | a user                   |
-| Update user        | /api/users/{user_id} | PATCH(PUT) | updated user             |
-| Remove a user      | /api/users/{user_id} | DELETE     | deleted user             |
-
+| Action               | URL                      | Method     | Response                 |
+| :------------------- | :----------------------- | :--------- | :----------------------- |
+| Add an item          | /api/items               | POST       | the new item (an object) |
+| View list of items   | /api/items               | GET        | array of items           |
+| View item details    | /api/items/{item_id}     | GET        | an item (an object)      |
+| Update an item       | /api/items/{item_id}     | PATCH(PUT) | updated item             |
+| Remove an item       | /api/items/{item_id}     | DELETE     | deleted item             |
+| Add a user           | /api/users               | POST       | the new user             |
+| View list of users   | /api/users               | GET        | array of users           |
+| View user details    | /api/users/{user_id}     | GET        | a user                   |
+| Update user          | /api/users/{user_id}     | PATCH(PUT) | updated user             |
+| Remove a user        | /api/users/{user_id}     | DELETE     | deleted user             |
+| Add a review         | /api/reviews             | POST       | the new review           |
+| View list of reviews | /api/reviews             | GET        | array of reviews         |
+| View review details  | /api/reviews/{review_id} | GET        | a reviews                |
+| Update review        | /api/reviews/{review_id} | PATCH(PUT) | updated reviews          |
+| Remove a review      | /api/reviews/{review_id} | DELETE     | deleted reviews          |
