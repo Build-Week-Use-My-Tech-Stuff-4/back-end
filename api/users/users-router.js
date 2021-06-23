@@ -8,7 +8,7 @@ router.get("/", restricted,  (req, res, next) => {
    })
    .catch(next)
   }) 
-router.get("/:id", (req, res, next) => {
+router.get("/:id", restricted, (req, res, next) => {
   Users.findById(req.params.id)
     .then(user => {
       res.status(200).json(user);
@@ -16,8 +16,8 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 })
 
-
-router.post('/',(req,res,next)=>{
+//this is redundant since the auth router handles adding users. I've left it in for dev use only. Really, I should have auth middleware to check if a user is an admin and restrict routes based on that. May add later as a stretch.
+router.post('/', restricted, (req,res,next)=>{
 Users.add(req.body)
 .then(user =>{
   res.status(201).json(user)
@@ -26,7 +26,7 @@ Users.add(req.body)
 })
 
 
-router.delete('/:id', (req, res, next)=>{
+router.delete('/:id', restricted, (req, res, next)=>{
   Users.remove(req.params.id)
   .then(user =>{
     if(user >0){

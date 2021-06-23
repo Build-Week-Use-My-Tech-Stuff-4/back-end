@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const Reviews = require("./reviews-model");
+const { restricted } = require("../auth/auth-middleware");
 
-router.get("/", (req, res, next) => {
+router.get("/", restricted, (req, res, next) => {
   Reviews.findAll()
     .then((reviews) => {
       res.status(200).json(reviews);
     })
     .catch(next);
 });
-router.get("/:id", (req, res, next) => {
+router.get("/:id", restricted, (req, res, next) => {
   Reviews.findById(req.params.id)
     .then((review) => {
       res.status(200).json(review);
@@ -16,7 +17,7 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", restricted, (req, res, next) => {
   Reviews.add(req.body)
     .then((review) => {
       res.status(201).json(review);
@@ -24,7 +25,7 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", restricted, (req, res, next) => {
   Reviews.remove(req.params.id)
     .then((review) => {
       if (review > 0) {
