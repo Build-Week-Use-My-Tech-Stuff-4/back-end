@@ -32,7 +32,7 @@ router.delete('/:id', (req, res, next)=>{
     if(user >0){
       res.status(200).json({message: "The user has been deleted."})
     } else {
-      res.status(404).jkson({message: "The user could not be found"})
+      res.status(404).jkson({message: "The user could not be found."})
     }
   })
   .catch(next)

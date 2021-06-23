@@ -17,7 +17,7 @@ function findAll() {
     "users.updated_on"
   );
 }
-//I think I need to break this out into two seperate tasks, the forEach seems to be running multiple times the way it is written
+
 
 async function findById(user_id) {
   const withItemsAndReviews = await db("users")
@@ -41,7 +41,7 @@ async function findById(user_id) {
     items: [],
     reviews: [],
   };
-  //this is where the problem is. it loops through but returns 9 items if there are 3, 4 if there are 2, etc.
+
   const itemsArray = [];
 
   withItemsAndReviews.forEach((item) => {
@@ -67,13 +67,12 @@ function findBy(filter) {
 }
 
 function remove(id) {
-  return db("users").where({ id }).del();
+  return db("users").where({ user_id:id }).del();
 }
 async function add(user) {
-  // const [id] =
-  return await db("users").insert(user);
+   const [id] =await db("users").insert(user);
 
-  // return findById(id);
+   return findById(id);
 }
 
 function update(id, changes) {

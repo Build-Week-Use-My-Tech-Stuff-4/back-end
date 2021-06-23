@@ -24,4 +24,19 @@ router.post("/", (req, res, next) => {
   .catch(next)
 });
 
+router.delete('/:id', (req, res, next)=>{
+  Items.remove(req.params.id)
+  .then(item =>{
+    if(item >0){
+      res.status(200).json({message: "The item has been deleted."})
+    } else {
+      res.status(404).jkson({message: "The item could not be found."})
+    }
+  })
+  .catch(next)
+  
+})
+
+
+
 module.exports = router;
