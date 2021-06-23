@@ -12,21 +12,24 @@ router.post("/register", (req, res, next) => {
   const hash = bcrypt.hashSync(user.password, rounds);
 
   user.password = hash;
-  Users.add(user).then(newUser=>{
-    res.status(201).json(newUser)
-  }).catch(next);
-
+  Users.add(user)
+    .then((newUser) => {
+      res.status(201).json(newUser);
+    })
+    .catch(next);
 });
 
 router.post("/login", checkUsernameExists, (req, res, next) => {
   let { user_name, password } = req.body;
 
-  Users.findBy({user_name}) // it would be nice to have middleware do this
+  Users.findBy({ user_name }) // it would be nice to have middleware do this
     .then(([user]) => {
+      console.log("user", user);
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = makeToken(user);
         res.status(200).json({
-          message: `Welcome back, ${user.user_name}`,
+          user_id: user.user_id,
+          user_name: user.user_name,
           token,
         });
       } else {
@@ -34,7 +37,6 @@ router.post("/login", checkUsernameExists, (req, res, next) => {
       }
     })
     .catch(next);
-
 });
 function makeToken(user) {
   const payload = {

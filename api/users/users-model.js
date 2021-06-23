@@ -5,6 +5,7 @@ module.exports = {
   findById,
   findBy,
   remove,
+  modify,
   add,
   update,
 };
@@ -17,7 +18,6 @@ function findAll() {
     "users.updated_on"
   );
 }
-//I think I need to break this out into two seperate tasks, the forEach seems to be running multiple times the way it is written
 
 async function findById(user_id) {
   const withItemsAndReviews = await db("users")
@@ -27,7 +27,10 @@ async function findById(user_id) {
       "items.item_id",
       "items.item_name",
       "reviews.review_id",
-      "reviews.reviewed_item_id"
+      "reviews.reviewed_item_id",
+      "reviews.reviewer_id",
+      "reviews.review_text",
+      "reviews.stars"
     )
     .leftJoin("items", "users.user_id", "items.lister_id")
     .leftJoin("reviews", "users.user_id", "reviews.reviewer_id")
@@ -41,7 +44,7 @@ async function findById(user_id) {
     items: [],
     reviews: [],
   };
-  //this is where the problem is. it loops through but returns 9 items if there are 3, 4 if there are 2, etc.
+
   const itemsArray = [];
 
   withItemsAndReviews.forEach((item) => {
@@ -57,6 +60,9 @@ async function findById(user_id) {
     reviewsArray.push({
       review_id: review.review_id,
       reviewed_item_id: review.reviewed_item_id,
+      review_text: review.review_text,
+      reviewer_id: review.reviewer_id,
+      stars: review.stars,
     });
   });
   return { ...user, items: itemsArray, reviews: reviewsArray };
@@ -67,13 +73,22 @@ function findBy(filter) {
 }
 
 function remove(id) {
-  return db("users").where({ id }).del();
+  return db("users").where({ user_id: id }).del();
 }
-async function add(user) {
-  // const [id] =
-  return await db("users").insert(user);
 
-  // return findById(id);
+function modify(id, changes){
+  return db("users")
+  .where({user_id: id})
+  .update(changes)
+  .then(()=>{
+    return findById(id)
+  })
+}
+
+async function add(user) {
+  const [id] = await db("users").insert(user);
+
+  return findById(id);
 }
 
 function update(id, changes) {
