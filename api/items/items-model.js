@@ -5,6 +5,7 @@ module.exports = {
   findById,
   findBy,
   remove,
+  modify,
   add,
   update,
 };
@@ -64,6 +65,18 @@ function findBy(filter) {
 function remove(item_id) {
   return db("items").where({ item_id }).del();
 }
+
+
+function modify(id, changes){
+  return db("items")
+  .where({item_id: id})
+  .update(changes)
+  .then(()=>{
+    return findById(id)
+  })
+}
+
+
 async function add(item) {
   const[id]= await db("items").insert(item)
   return findById(id)

@@ -27,7 +27,20 @@ router.post("/", restricted, (req, res, next) => {
     })
     .catch(next);
 });
+router.patch("/:id", restricted, (req, res, next) => {
+  const { id } = req.params;
+  const changes = req.body;
 
+  Items.modify(id, changes)
+    .then((item) => {
+      if (item) {
+        res.status(200).json(item);
+      } else {
+        res.status(404).json({ message: "Unable to find that item." });
+      }
+    })
+    .catch(next);
+});
 router.delete("/:id", restricted, (req, res, next) => {
   Items.remove(req.params.id)
     .then((item) => {

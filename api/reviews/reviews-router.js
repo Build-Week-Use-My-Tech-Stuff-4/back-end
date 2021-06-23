@@ -24,7 +24,19 @@ router.post("/", restricted, (req, res, next) => {
     })
     .catch(next);
 });
-
+router.patch('/:id', restricted, (req,res,next)=>{
+  const {id}=req.params
+  const changes = req.body
+  
+  Reviews.modify(id,changes)
+  .then(review=>{
+    if(review){
+      res.status(200).json(review)
+    }else{
+    res.status(404).json({message: "Unable to find that review."})
+  }
+  }) .catch(next)
+  })
 router.delete("/:id", restricted, (req, res, next) => {
   Reviews.remove(req.params.id)
     .then((review) => {

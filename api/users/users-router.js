@@ -25,6 +25,19 @@ Users.add(req.body)
 .catch(next)
 })
 
+router.patch('/:id', restricted, (req,res,next)=>{
+const {id}=req.params
+const changes = req.body
+
+Users.modify(id,changes)
+.then(user=>{
+  if(user){
+    res.status(200).json(user)
+  }else{
+  res.status(404).json({message: "Unable to find that user."})
+}
+}) .catch(next)
+})
 
 router.delete('/:id', restricted, (req, res, next)=>{
   Users.remove(req.params.id)
