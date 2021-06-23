@@ -22,8 +22,8 @@ function findBy(filter) {
 }
 
 
-function remove(id) {
-  return db("reviews").where({ id }).del();
+function remove(review_id) {
+  return db("reviews").where({ review_id }).del();
 }
 async function add(review) {
   console.log(review);
