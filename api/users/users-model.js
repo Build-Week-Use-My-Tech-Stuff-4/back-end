@@ -18,7 +18,6 @@ function findAll() {
   );
 }
 
-
 async function findById(user_id) {
   const withItemsAndReviews = await db("users")
     .select(
@@ -27,7 +26,10 @@ async function findById(user_id) {
       "items.item_id",
       "items.item_name",
       "reviews.review_id",
-      "reviews.reviewed_item_id"
+      "reviews.reviewed_item_id",
+      "reviews.reviewer_id",
+      "reviews.review_text",
+      "reviews.stars"
     )
     .leftJoin("items", "users.user_id", "items.lister_id")
     .leftJoin("reviews", "users.user_id", "reviews.reviewer_id")
@@ -57,6 +59,9 @@ async function findById(user_id) {
     reviewsArray.push({
       review_id: review.review_id,
       reviewed_item_id: review.reviewed_item_id,
+      review_text: review.review_text,
+      reviewer_id: review.reviewer_id,
+      stars: review.stars,
     });
   });
   return { ...user, items: itemsArray, reviews: reviewsArray };
@@ -67,12 +72,12 @@ function findBy(filter) {
 }
 
 function remove(id) {
-  return db("users").where({ user_id:id }).del();
+  return db("users").where({ user_id: id }).del();
 }
 async function add(user) {
-   const [id] =await db("users").insert(user);
+  const [id] = await db("users").insert(user);
 
-   return findById(id);
+  return findById(id);
 }
 
 function update(id, changes) {
