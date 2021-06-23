@@ -61,11 +61,10 @@ return { ...item, reviews: reviewsArray };
 function findBy(filter) {
   return db("items").where(filter);
 }
-function remove(id) {
-  return db("items").where({ id }).del();
+function remove(item_id) {
+  return db("items").where({ item_id }).del();
 }
 async function add(item) {
-  console.log(item)
   const[id]= await db("items").insert(item)
   return findById(id)
 }

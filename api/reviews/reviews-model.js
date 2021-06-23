@@ -3,6 +3,7 @@ const db = require("../../data/db-config");
 module.exports = {
   findAll,  
   findById,
+  findBy,
   remove,
   add,
   update,
@@ -15,6 +16,12 @@ function findAll(){
 function findById(id) {
   return db("reviews").where({ review_id: id }).first();
 }
+
+function findBy(filter) {
+  return db("reviews").where(filter);
+}
+
+
 function remove(id) {
   return db("reviews").where({ id }).del();
 }

@@ -18,6 +18,8 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
+  console.log('body',req.body)
+
   Items.add(req.body).then((item) => {
     res.status(201).json(item);
   })
@@ -30,12 +32,12 @@ router.delete('/:id', (req, res, next)=>{
     if(item >0){
       res.status(200).json({message: "The item has been deleted."})
     } else {
-      res.status(404).jkson({message: "The item could not be found."})
+      res.status(404).json({message: "The item could not be found."})
     }
   })
   .catch(next)
   
-})
+})        
 
 
 
