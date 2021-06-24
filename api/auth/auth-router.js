@@ -1,5 +1,6 @@
-const bcrypt = require("bcryptjs");
 const router = require("express").Router();
+
+const bcrypt = require("bcryptjs");
 const { checkUsernameExists } = require("./auth-middleware");
 const { JWT_SECRET } = require("../secrets"); // use this secret!
 const Users = require("../users/users-model");
@@ -7,14 +8,14 @@ const jwt = require("jsonwebtoken");
 
 router.post("/register", (req, res, next) => {
   let user = req.body;
-
+  console.log(req.body);
   const rounds = process.env.BCRYPT_ROUNDS || 8;
   const hash = bcrypt.hashSync(user.password, rounds);
-
+  // added token to the return from register
   user.password = hash;
   Users.add(user)
     .then((newUser) => {
-      res.status(201).json(newUser);
+      res.status(201).json({ user: newUser, token });
     })
     .catch(next);
 });
