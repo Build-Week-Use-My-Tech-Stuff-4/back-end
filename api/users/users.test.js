@@ -3,6 +3,17 @@ const request = require("supertest");
 const server = require('../server')
 const Users = require('./users-model')
 
+const listOfUsers= [{ user_id: 1, user_name: "test", email: "test1@123.com", password: "1234" },
+{
+  user_id: 2,
+  user_name: "Deep Thought",
+  email: "test2@123.com",
+  password: "1234",
+  city: "Kansas City",
+  state: "Kansas",
+  zip: 66101,
+},]
+
 beforeAll(async () => {
     await db.migrate.rollback()
     await db.migrate.latest()
@@ -14,7 +25,7 @@ beforeAll(async () => {
     await db.destroy()
   })
 
-//Model tests
+//Model test
 describe('Users', () => {
     describe('sanity', () => {
         test('Users is defined', () => {
@@ -46,4 +57,14 @@ describe('Users', () => {
 
 
 
-//Server tests
+//API test
+describe('GET /users', () => {
+    beforeEach(async () => {
+        await db('users').insert(listOfUsers)
+      })
+      it('responds with a 200 OK', async () => {
+        const res = await request(server).get('/api/users')
+        expect(res.status).toBe(200)
+      })
+});
+
