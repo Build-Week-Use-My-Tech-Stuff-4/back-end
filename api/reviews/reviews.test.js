@@ -8,7 +8,7 @@ beforeAll(async () => {
   await db.migrate.latest();
 });
 beforeEach(async () => {
-  await db("users").truncate();
+  await db("reviews").truncate();
 });
 afterAll(async () => {
   await db.destroy();
@@ -41,15 +41,15 @@ describe("Reviews", () => {
       await db("reviews").insert({ review_text: "Yet another review" });
       let reviews = await Reviews.findAll();
       console.log("reviews", reviews);
-      expect(reviews[2]).toMatchObject(
+      expect(reviews).toMatchObject([
         {
-          review_id: 3,
+          review_id: 1,
           review_text: "Yet another review",
           stars: null,
           reviewer_id: null,
           reviewed_item_id: null,
         },
-      );
+    ]);
     });
   });
 });
