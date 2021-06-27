@@ -1,6 +1,5 @@
 {
-
- "name": "back-end",
+  "name": "back-end",
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
@@ -10,7 +9,7 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
-    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand"
+    "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand"
   },
   "repository": {
     "type": "git",
@@ -36,7 +35,8 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "jest": "^27.0.4",
+    "cross-env": "^7.0.3",
+    "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3"
   },

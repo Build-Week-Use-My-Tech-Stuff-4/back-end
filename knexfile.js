@@ -1,5 +1,5 @@
 
-const sharedConfig = {
+const devConfig = {
   client: 'sqlite3',
   useNullAsDefault: true,
   migrations: {
@@ -15,14 +15,30 @@ const sharedConfig = {
     },
   },
 }
-
+const testConfig = {
+  client: 'sqlite3',
+  useNullAsDefault: true,
+  migrations: {
+    directory: './data/migrations',
+  },
+  seeds: {
+    directory: './data/seeds',
+  },
+  // this enables foreign keys in SQLite
+  pool: {
+    afterCreate: (conn, done) => {
+      conn.run('PRAGMA foreign_keys = ON', done)
+    },
+  },
+}
 module.exports = {
   development: {
-    ...sharedConfig,
+    ...devConfig,
     connection: { filename: './data/auth.db3' },
+    seeds: { directory: './data/seeds'}
   },
   testing: {
-    ...sharedConfig,
+    ...testConfig,
     connection: { filename: './data/testing.db3' },
   },
 }
