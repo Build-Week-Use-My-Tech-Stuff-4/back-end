@@ -1,6 +1,6 @@
 const db = require("../../data/db-config");
 const request = require("supertest");
-const server = require('./users-router')
+const server = require('../server')
 const Users = require('./users-model')
 
 beforeAll(async () => {

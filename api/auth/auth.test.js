@@ -40,7 +40,7 @@ describe("[POST] /login", () => {
     const user = await request(server)
       .post("/api/auth/login")
       .send({ user_name: "test2", password: "1234" });
-    console.log("auth user body", user.body);
+    //console.log("auth user body", user.body);
     expect(user.body.message).toEqual("Welcome back.");
   });
   it("returns error when user doesnt exist", async () => {
