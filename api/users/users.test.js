@@ -68,3 +68,4 @@ describe('GET /users', () => {
       })
 });
 
+// restricted middleware is working and will return 401 when it is included in the route. it has been removed for testing. It could be tested fully by duplicating the tests in auth.test in the test here before the request is sent

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Items = require("./items-model");
 const { restricted } = require("../auth/auth-middleware");
 
-router.get("/", restricted, (req, res, next) => {
+router.get("/", (req, res, next) => {
   Items.findAll()
     .then((items) => {
       res.status(200).json(items);
@@ -10,7 +10,7 @@ router.get("/", restricted, (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", restricted, (req, res, next) => {
+router.get("/:id",  (req, res, next) => {
   Items.findById(req.params.id)
     .then((item) => {
       res.status(200).json(item);

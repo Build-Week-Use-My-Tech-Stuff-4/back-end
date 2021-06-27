@@ -3,6 +3,18 @@ const request = require("supertest");
 const server = require("../server");
 const Reviews = require("./reviews-model");
 
+const listOfReviews= [   {
+  review_id: 1,
+  review_text: "Perfect! Just what I needed.",
+  stars: 5,
+},
+{
+  review_id: 2,
+  review_text: "I wrote the answer on my palm and it washed off.",
+  stars: 2,
+}]
+
+
 beforeAll(async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
@@ -52,4 +64,15 @@ describe("Reviews", () => {
     ]);
     });
   });
+});
+
+// API test
+describe('GET /reviews', () => {
+  beforeEach(async () => {
+      await db('reviews').insert(listOfReviews)
+    })
+    it('responds with a 200 OK', async () => {
+      const res = await request(server).get('/api/reviews')
+      expect(res.status).toBe(200)
+    })
 });

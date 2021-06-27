@@ -2,8 +2,9 @@ const db = require("../../data/db-config");
 const request = require("supertest");
 const server = require("../server");
 const Items = require("./items-model");
-const { expectCt } = require("helmet");
-const Users = require("../users/users-model");
+
+
+const listOfItems = [{item_name: "item1", description: "test item", location: "in the test", price_per_day: 42, available: true}]
 
 beforeAll(async () => {
   await db.migrate.rollback();
@@ -60,3 +61,15 @@ describe("Items", () => {
     });
   });
 });
+//API test
+describe('GET /items', () => {
+  beforeEach(async () => {
+      await db('items').insert(listOfItems)
+    })
+    it('responds with a 200 OK', async () => {
+      const res = await request(server).get('/api/items')
+      expect(res.status).toBe(200)
+    })
+});
+
+// restricted middleware is working and will return 401 when it is included in the route. it has been removed for testing. It could be tested fully by duplicating the tests in auth.test in the test here before the request is sent
