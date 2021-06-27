@@ -33,7 +33,7 @@ describe('Users', () => {
           users = await Users.findAll()
           expect(users).toHaveLength(2)
         })
-        it('resolves to users of the correct shape', async () => {
+        it('resolves to users of the correct shape, password not returned', async () => {
           await db('users').insert({ user_name: 'testUser',
         password: '1234' })
           let users = await Users.findAll()

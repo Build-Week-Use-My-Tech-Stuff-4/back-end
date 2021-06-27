@@ -9,7 +9,7 @@ test("sanity", () => {
 describe("Get `/`", () => {
   it("responds with the MOTD", async () => {
     const res = await request(server).get("/");
-   // console.log(res.status)
+    console.log(res.status)
     expect(res.status).toEqual(200);
   });
 });
