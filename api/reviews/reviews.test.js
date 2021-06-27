@@ -37,10 +37,10 @@ describe("Reviews", () => {
       reviews = await Reviews.findAll();
       expect(reviews).toHaveLength(2);
     });
-    it("reviews are the correct shape", async () => {
+    it("reviews are the correct shape, nulls set when no data is entered", async () => {
       await db("reviews").insert({ review_text: "Yet another review" });
       let reviews = await Reviews.findAll();
-      console.log("reviews", reviews);
+      //console.log("reviews", reviews);
       expect(reviews).toMatchObject([
         {
           review_id: 1,
