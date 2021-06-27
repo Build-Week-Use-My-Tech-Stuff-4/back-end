@@ -20,9 +20,13 @@ describe("[POST] /register", () => {
         .send({ user_name: "test2", password: "1234" });
       console.log("here", newUser.body)
       expect(newUser.body.user.user_name).toEqual("test2");
-    });
-    
-  });
-test("sanity", () => {
-  expect(true).toBe(true);
-});
+    })
+    it("returns error when username is blank", async () => {
+        const response = await request(server)
+          .post("/api/auth/register")
+          .send({ password: "1234" });
+        expect(response.body).toEqual({
+          message: "username and password required",
+        });
+      });
+})

@@ -5,8 +5,10 @@ const { checkUsernameExists } = require("./auth-middleware");
 const { JWT_SECRET } = require("../secrets"); // use this secret!
 const Users = require("../users/users-model");
 const jwt = require("jsonwebtoken");
+const {checkUser}= require('../auth/auth-middleware')
 
-router.post("/register", (req, res, next) => {
+
+router.post("/register", checkUser, (req, res, next) => {
   let user = req.body;
   console.log(req.body);
   const rounds = process.env.BCRYPT_ROUNDS || 8;
