@@ -28,10 +28,20 @@ const checkUsernameExists = (req, res, next) => {
     res.status(401).json({ message: "Invalid Credentials" });
   }
 };
+const checkUser = (req, res, next) => {
+  const {user_name, password} = req.body
+ if(!user_name || !password){
+  res.status(400).json({ message: "username and password required" });
+ }else{
+     next()
+ }
+}
+
 
 
 
 module.exports = {
   restricted,
   checkUsernameExists,
+  checkUser
 };

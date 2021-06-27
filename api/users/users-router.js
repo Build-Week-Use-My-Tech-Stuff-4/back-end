@@ -2,13 +2,13 @@ const router = require("express").Router();
 const Users = require("./users-model");
 const {restricted} = require("../auth/auth-middleware")
 
-router.get("/", restricted,  (req, res, next) => {
+router.get("/",  (req, res, next) => {
    Users.findAll().then(users => {
        res.status(200).json(users)
    })
    .catch(next)
   }) 
-router.get("/:id", restricted, (req, res, next) => {
+router.get("/:id", (req, res, next) => {
   Users.findById(req.params.id)
     .then(user => {
       res.status(200).json(user);

@@ -2,14 +2,14 @@ const router = require("express").Router();
 const Reviews = require("./reviews-model");
 const { restricted } = require("../auth/auth-middleware");
 
-router.get("/", restricted, (req, res, next) => {
+router.get("/",  (req, res, next) => {
   Reviews.findAll()
     .then((reviews) => {
       res.status(200).json(reviews);
     })
     .catch(next);
 });
-router.get("/:id", restricted, (req, res, next) => {
+router.get("/:id",  (req, res, next) => {
   Reviews.findById(req.params.id)
     .then((review) => {
       res.status(200).json(review);
